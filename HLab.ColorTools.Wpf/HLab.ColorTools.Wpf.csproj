@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <Platforms>x64</Platforms>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+
+</Project>
