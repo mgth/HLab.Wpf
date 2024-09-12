@@ -1,12 +1,10 @@
-﻿using HLab.Base.Wpf;
-using HLab.Icons.Annotations.Icons;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
-using HLab.Mvvm.Annotations;
 using HLab.Base.Wpf.DependencyProperties;
+using HLab.Mvvm.Annotations;
 
 namespace HLab.Icons.Wpf.Icons;
 
