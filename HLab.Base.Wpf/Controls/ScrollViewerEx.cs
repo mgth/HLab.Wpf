@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace HLab.Base.Wpf.ControlsEx
+namespace HLab.Base.Wpf.Controls
 {
     public class ScrollViewerEx : ScrollViewer
     {

@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lang="clr-namespace:HLab.Localization.Wpf.Lang;assembly=HLab.Localization.Wpf"
-        xmlns:xcad="https://github.com/Dirkster99/AvalonDock"
         xmlns:wpf="clr-namespace:HLab.Mvvm.Application.Wpf"
         xmlns:icons="clr-namespace:HLab.Icons.Wpf.Icons;assembly=HLab.Icons.Wpf"
         xmlns:wpf1="clr-namespace:HLab.Mvvm.Wpf;assembly=HLab.Mvvm.Wpf"
@@ -54,7 +53,7 @@
                 <StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0,0,120,0" VerticalAlignment="Center">
                     <ComboBox 
                         SelectedItem="{Binding ApplicationInfo.Theme}" 
-                        Visibility="{Binding AllowThemeSelection,Converter={StaticResource ToVisibilityConverter},FallbackValue=Visible}"      
+                        Visibility="{Binding AllowThemeSelection, Converter={StaticResource ToVisibilityConverter},FallbackValue=Visible}"      
                         Grid.Row="1" 
                         Grid.Column="1" 
                         ItemsSource="{Binding ApplicationInfo.Themes}"

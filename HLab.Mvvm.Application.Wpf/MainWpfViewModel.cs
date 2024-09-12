@@ -1,33 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
-using HLab.Core.Annotations;
 using HLab.Erp.Acl;
-using HLab.Icons.Annotations.Icons;
 using HLab.Mvvm.Annotations;
 using HLab.Mvvm.Application.Documents;
 using HLab.Mvvm.ReactiveUI;
 using ReactiveUI;
 
-namespace HLab.Mvvm.Application.Wpf
-{
-    using H = H<MainWpfViewModel>;
-
 namespace HLab.Mvvm.Application.Wpf;
-
-    public class MainWpfViewModelDesign : MainWpfViewModel
-    {
-        public MainWpfViewModelDesign() 
-            : base(null, null, null, null, null, null )
-        {
-            
-        }
-    }
 
 public class MainWpfViewModel : ViewModel
     {
