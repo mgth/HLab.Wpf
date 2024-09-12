@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controlsEx="clr-namespace:HLab.Base.Wpf.ControlsEx;assembly=HLab.Base.Wpf"
+        xmlns:controls="clr-namespace:HLab.Base.Wpf.Controls;assembly=HLab.Base.Wpf"
         mc:Ignorable="d"
         SizeToContent ="WidthAndHeight"
         Title="Problem report" Height="450" Width="800"
@@ -90,7 +91,7 @@
                 <Button Foreground="{DynamicResource HLab.Brushes.Foreground}" Background="Green" x:Name="ThrowButton" Click="ThrowButton_OnClick" Width="100" IsDefault="True">Throw</Button> 
             </StackPanel>
         </DockPanel>
-        <controlsEx:ScrollViewerEx
+        <controls:ScrollViewerEx
             MaxWidth="800"
             MaxHeight="400"
             x:Name="ScrollViewer"
@@ -100,6 +101,6 @@
             Foreground="{DynamicResource HLab.Brushes.Foreground}"
             x:Name="DetailTextBlock" 
             Visibility="Collapsed"/>
-        </controlsEx:ScrollViewerEx>
+        </controls:ScrollViewerEx>
     </StackPanel>
 </Window>
