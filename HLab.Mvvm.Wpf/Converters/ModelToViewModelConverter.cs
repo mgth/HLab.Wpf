@@ -27,6 +27,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using HLab.Mvvm.Annotations;
+using HLab.Mvvm.Wpf;
 
 namespace HLab.Mvvm.Wpf.Converters
 {

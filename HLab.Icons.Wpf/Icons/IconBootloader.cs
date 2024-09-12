@@ -7,6 +7,7 @@ using System.Resources;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using HLab.Core.Annotations;
+using HLab.Icons.Annotations.Icons;
 using HLab.Icons.Wpf.Icons.Providers;
 using HLab.Mvvm.Annotations;
 

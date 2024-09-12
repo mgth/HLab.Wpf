@@ -9,8 +9,13 @@ namespace HLab.ColorTools.Wpf;
 
 public static partial class ColorExtensions
 {
-    public static readonly Color[] DefaultColors =
+    /// <summary>
+    /// RGB structure.
+    /// </summary>
+    public static class ErpColor
     {
+        public static readonly Color[] DefaultColors =
+        {
         Colors.Blue,
         Colors.DarkGreen,
         Colors.DarkCyan,
@@ -18,15 +23,15 @@ public static partial class ColorExtensions
         Colors.DarkRed,
         Colors.DarkGoldenrod,
         Colors.DarkKhaki
-    };
+        };
 
-    public static Color GetColor(int idx)
-    {
-        return DefaultColors[idx%DefaultColors.Length];
-    }
+        public static Color GetColor(int idx)
+        {
+            return DefaultColors[idx%DefaultColors.Length];
+        }
 
-    public static int ToInt(this Color c)
-    {
+        public static int ToInt(this Color c)
+        {
         return (int)(
             ((uint)c.A) + 
             ((uint)c.R << 8) + 
@@ -72,13 +77,13 @@ public static partial class ColorExtensions
             (byte) (((uint)v>>24) & 0xFF)
         );
         return c;
-    }
+        }
 
     public static Color ToWpfColor(this IColor<byte> c)
-    {
+        {
         var rgb = c.ToRGB();
         return Unsafe.As<ColorRGB<byte>, Color>(ref rgb);
-    }
+        }
 
     public static ColorRGB<byte> ToColor(this Color c) => Unsafe.As<Color, ColorRGB<byte>>(ref c);
 
@@ -108,7 +113,7 @@ public static partial class ColorExtensions
         public Color Color => Color.FromArgb((byte)(A * 255.0), (byte)(R * 255.0), (byte)(G * 255.0), (byte)(B * 255.0));
 
         public static WeightedColor Average(params WeightedColor[] color)
-        {
+            {
             var w = 0.0;
 
             var a = 0.0;

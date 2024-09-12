@@ -20,12 +20,12 @@ public class IconProviderXamlFromSource(string source, string name, int? foregro
     }
 
     public Task<object> GetAsync(uint foregroundColor = 0)
-    {
+{
         throw new System.NotImplementedException();
     }
-
+ 
     public Task<string> GetTemplateAsync(uint foregroundColor = 0)
-    {
+    { 
         throw new System.NotImplementedException();
     }
 }

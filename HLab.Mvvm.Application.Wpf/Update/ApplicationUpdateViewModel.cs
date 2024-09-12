@@ -17,7 +17,8 @@ using ReactiveUI;
 
 namespace HLab.Mvvm.Application.Wpf.Update
 {
-    
+    using H = H<UpdaterWpf>;
+
 
     public class UpdaterWpf : ReactiveModel, IUpdater
     {
@@ -37,6 +38,8 @@ namespace HLab.Mvvm.Application.Wpf.Update
             set => SetAndRaise(ref _fileName,value);
         }
         string _fileName ;
+
+        readonly IProperty<string> _fileName = H.Property<string>();
 
 
         // http://www.chmp.org/sites/default/files/apps/sampling/

@@ -10,12 +10,12 @@ using HLab.Mvvm.Application.Messages;
 namespace HLab.Mvvm.Application.Wpf;
 
 public class WpfDocumentService(
-    IMvvmService mvvm,
-    Func<Type, object> getter,
-    IMessagesService messageBus,
+        IMvvmService mvvm,
+        Func<Type, object> getter,
+        IMessagesService messageBus,
     Func<object, ISelectedMessage> getMessage)
     : DocumentService(mvvm, getter)
-{
+    {
     public IMessagesService MessageBus { get; } = messageBus;
     Func<object, ISelectedMessage> GetMessage { get; } = getMessage;
 

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:lang="clr-namespace:HLab.Localization.Wpf.Lang;assembly=HLab.Localization.Wpf"
+        xmlns:xcad="https://github.com/Dirkster99/AvalonDock"
         xmlns:wpf="clr-namespace:HLab.Mvvm.Application.Wpf"
         xmlns:icons="clr-namespace:HLab.Icons.Wpf.Icons;assembly=HLab.Icons.Wpf"
         xmlns:wpf1="clr-namespace:HLab.Mvvm.Wpf;assembly=HLab.Mvvm.Wpf"

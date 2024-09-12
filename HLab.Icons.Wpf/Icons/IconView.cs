@@ -1,4 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿using HLab.Base.Wpf;
+using HLab.Icons.Annotations.Icons;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
