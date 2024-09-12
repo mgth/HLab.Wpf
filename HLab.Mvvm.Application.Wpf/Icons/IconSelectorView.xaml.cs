@@ -2,7 +2,6 @@
 using System.Windows.Controls;
 using HLab.Base.Wpf.DependencyProperties;
 using HLab.Erp.Core;
-using HLab.Icons.Annotations.Icons;
 using HLab.Mvvm.Wpf;
 
 namespace HLab.Mvvm.Application.Wpf.Icons

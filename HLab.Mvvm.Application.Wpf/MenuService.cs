@@ -3,8 +3,6 @@ using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-
-using HLab.Erp.Core;
 using HLab.Icons.Wpf.Icons;
 using HLab.Localization.Wpf.Lang;
 using HLab.Mvvm.Application.Menus;

@@ -7,14 +7,12 @@ using System.Windows.Markup;
 
 using HLab.Core.Annotations;
 using HLab.Erp.Acl.LoginServices;
-using HLab.Erp.Core;
 using HLab.Erp.Core.Update;
 using HLab.Erp.Core.Wpf.Localization;
 using HLab.Mvvm.Annotations;
 using HLab.Mvvm.Application.Menus;
 using HLab.Mvvm.Application.Updater;
 using HLab.Mvvm.ReactiveUI;
-using HLab.Mvvm.Views;
 using HLab.Mvvm.Wpf.Views;
 
 namespace HLab.Mvvm.Application.Wpf

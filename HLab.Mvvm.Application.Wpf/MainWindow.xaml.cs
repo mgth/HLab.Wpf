@@ -1,9 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using AvalonDock.Layout.Serialization;
 using HLab.Erp.Acl.Annotations;
 using HLab.Mvvm.Annotations;
 using HLab.Mvvm.Wpf;

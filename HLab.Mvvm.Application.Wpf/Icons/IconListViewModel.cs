@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 
 using HLab.Erp.Base.Data;
-using HLab.Erp.Core.Wpf.EntityLists;
 using HLab.Erp.Core.ListFilterConfigurators;
 using HLab.Erp.Data;
 using HLab.Mvvm.Annotations;

@@ -3,12 +3,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Reactive.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HLab.Base.ReactiveUI;
-using HLab.Erp.Core;
 using HLab.Erp.Core.Update;
 using HLab.Mvvm.Application.Updater;
 using HLab.Mvvm.ReactiveUI;
@@ -17,9 +14,6 @@ using ReactiveUI;
 
 namespace HLab.Mvvm.Application.Wpf.Update
 {
-    using H = H<UpdaterWpf>;
-
-
     public class UpdaterWpf : ReactiveModel, IUpdater
     {
         public IApplicationInfoService Info { get; }
@@ -39,7 +33,6 @@ namespace HLab.Mvvm.Application.Wpf.Update
         }
         string _fileName ;
 
-        readonly IProperty<string> _fileName = H.Property<string>();
 
 
         // http://www.chmp.org/sites/default/files/apps/sampling/
