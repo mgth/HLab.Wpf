@@ -18,9 +18,6 @@ public class IconBootloader(IIconService icons) : IBootloader
     {
         foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(e => !e.IsDynamic))
         {
-            if(assembly.FullName.Contains("Erp.Base.Wpf"))
-            {}
-
             try
             {
                 var v = assembly.GetCustomAttribute<AssemblyCompanyAttribute>();
@@ -36,17 +33,6 @@ public class IconBootloader(IIconService icons) : IBootloader
 
                     resourcePath = Uri.UnescapeDataString(resourcePath);
 
-                    bool HasSuffix(string path, string suffix, out string result)
-                    {
-                        if (!path.EndsWith(suffix))
-                        {
-                            result = null;
-                            return false;
-                        }
-
-                        result = path[..^suffix.Length];
-                        return true;
-                    }
                     if (HasSuffix(resourcePath,".xaml",out var xamlPath))
                     {
                         icons.AddIconProvider(xamlPath, new IconProviderXamlFromResource(resourceManager, resourcePath, Colors.Black));
@@ -61,6 +47,20 @@ public class IconBootloader(IIconService icons) : IBootloader
                             bamlPath, 
                             new IconProviderXamlFromUri(new Uri( $"/{assembly.FullName};component/{bamlPath}.xaml",UriKind.Relative))
                         );
+                    }
+
+                    continue;
+
+                    bool HasSuffix(string path, string suffix, out string result)
+                    {
+                        if (!path.EndsWith(suffix))
+                        {
+                            result = null;
+                            return false;
+                        }
+
+                        result = path[..^suffix.Length];
+                        return true;
                     }
                 }
             }

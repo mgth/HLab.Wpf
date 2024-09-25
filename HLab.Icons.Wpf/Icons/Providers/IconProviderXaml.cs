@@ -4,39 +4,34 @@ using System.Windows.Markup;
 
 namespace HLab.Icons.Wpf.Icons.Providers;
 
-public abstract class IconProviderXaml : IconProvider
+public abstract class IconProviderXaml(string sourceXaml) : IconProvider
 {
-    string _sourceXaml;
+    string _sourceXaml = sourceXaml;
 
-    protected IconProviderXaml(string sourceXaml)
+    protected override object? GetIcon(uint foregroundColor = 0) => XamlTools.FromXamlString(_sourceXaml);
+
+    protected override async Task<object?> GetIconAsync(uint foregroundColor = 0) => await XamlTools.FromXamlStringAsync(_sourceXaml).ConfigureAwait(true);
+
+    public override Task<string> GetTemplateAsync(uint foregroundColor = 0)
     {
-        _sourceXaml = sourceXaml;
+        return Task.FromResult(_sourceXaml);
     }
-
-    protected override object? GetIcon() => XamlTools.FromXamlString(_sourceXaml);
-
-    protected override async Task<object?> GetIconAsync() => await XamlTools.FromXamlStringAsync(_sourceXaml).ConfigureAwait(true);
-
-    public override async Task<string> GetTemplateAsync() => _sourceXaml;
 
     protected void SetSource(string  source) => _sourceXaml = source;
 }
 
-public abstract class IconProviderXamlParser : IconProviderXaml
+public abstract class IconProviderXamlParser() : IconProviderXaml("")
 {
     bool _parsed = false;
-    protected IconProviderXamlParser() : base("")
-    {
-    }
 
-    protected abstract object? ParseIcon();
-    protected abstract Task<object?> ParseIconAsync();
+    protected abstract object? ParseIcon(uint foregroundColor = 0);
+    protected abstract Task<object?> ParseIconAsync(uint foregroundColor = 0);
         
-    protected override object? GetIcon()
+    protected override object? GetIcon(uint foregroundColor = 0)
     {
-        if (_parsed) return base.GetIcon();
+        if (_parsed) return base.GetIcon(foregroundColor);
 
-        if (ParseIcon() is not { } icon) return null;
+        if (ParseIcon(foregroundColor) is not { } icon) return null;
 
         SetSource(XamlWriter.Save(icon));
         _parsed = true;
@@ -44,11 +39,11 @@ public abstract class IconProviderXamlParser : IconProviderXaml
         return icon;
     }
 
-    protected override async Task<object?> GetIconAsync()
+    protected override async Task<object?> GetIconAsync(uint foregroundColor = 0)
     {
-        if (_parsed) return await base.GetIconAsync();
+        if (_parsed) return await base.GetIconAsync(foregroundColor);
 
-        if (await ParseIconAsync() is not { } icon) return null;
+        if (await ParseIconAsync(foregroundColor) is not { } icon) return null;
 
         await Application.Current.Dispatcher.InvokeAsync(
             ()=>SetSource(XamlWriter.Save(icon)),XamlTools.Priority2);
@@ -57,13 +52,13 @@ public abstract class IconProviderXamlParser : IconProviderXaml
         return icon;
     }
 
-    public override async Task<string> GetTemplateAsync()
+    public override async Task<string> GetTemplateAsync(uint foregroundColor = 0)
     {
         while (!_parsed)
         {
-            await GetIconAsync();
+            await GetIconAsync(foregroundColor);
         }
-        return await base.GetTemplateAsync();
+        return await base.GetTemplateAsync(foregroundColor);
     }
 
 }

@@ -23,13 +23,6 @@ public class IconService : Service, IIconService
 
     readonly AsyncDictionary<string, object> _templates = new();
 
-    public async Task<object> GetIconTemplateAsync(string path)
-    {
-        return await _templates.GetOrAddAsync(
-            path, 
-            p => BuildAsync(path)
-        );
-    }
 
     async Task<object> BuildAsync(string path, object foreground = null)
     {
@@ -112,7 +105,7 @@ public class IconService : Service, IIconService
     }
 
 
-    object GetSingleIcon(string path)
+    object? GetSingleIcon(string path)
     {
         if (string.IsNullOrWhiteSpace(path)) return null;
 
@@ -176,10 +169,14 @@ public class IconService : Service, IIconService
         return "";
     }
 
-    public Task<object?> GetIconTemplateAsync(string path, uint foregroundColor = 0)
+    public async Task<object?> GetIconTemplateAsync(string path, uint foregroundColor = 0)
     {
-        throw new NotImplementedException();
+        return await _templates.GetOrAddAsync(
+            path, 
+            p => BuildAsync(path)
+        );
     }
+
 
     public Task<object?> GetIconAsync(string path, uint foregroundColor = 0)
     {

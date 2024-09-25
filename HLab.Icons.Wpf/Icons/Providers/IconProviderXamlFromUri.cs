@@ -5,44 +5,24 @@ using HLab.Mvvm.Annotations;
 
 namespace HLab.Icons.Wpf.Icons.Providers;
 
-public class IconProviderXamlFromUri : IconProviderXamlParser, IIconProvider
+public class IconProviderXamlFromUri(Uri uri) : IconProviderXamlParser
 {
-    readonly Uri _uri;
-
-    public IconProviderXamlFromUri(Uri uri)
-    {
-        _uri = uri;
-    }
-    protected override object? ParseIcon()
+    protected override object? ParseIcon(uint foregroundColor = 0)
     {
         AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
-        return Application.LoadComponent(_uri);;
+        return Application.LoadComponent(uri);;
     }
         
-    protected override async Task<object?> ParseIconAsync()
+    protected override async Task<object?> ParseIconAsync(uint foregroundColor = 0)
     {
         object? icon = null;
         AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
         await Application.Current.Dispatcher.InvokeAsync(
-            () => icon = Application.LoadComponent(_uri)
+            () => icon = Application.LoadComponent(uri)
             ,XamlTools.Priority
         );
 
         return icon;
     }
 
-    public object Get(uint foregroundColor = 0)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<object> GetAsync(uint foregroundColor = 0)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<string> GetTemplateAsync(uint foregroundColor = 0)
-    {
-        throw new NotImplementedException();
-    }
 }

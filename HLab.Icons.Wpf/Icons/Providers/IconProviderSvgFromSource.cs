@@ -14,16 +14,16 @@ public class IconProviderSvgFromSource : IconProviderXamlParser, IIconProvider
         _name = name;
     }
 
-    protected override async Task<object?> ParseIconAsync() => await XamlTools.FromSvgStringAsync(_source);
+    protected override async Task<object?> ParseIconAsync(uint foregroundColor = 0) => await XamlTools.FromSvgStringAsync(_source);
 
-    protected override object? ParseIcon()=> XamlTools.FromSvgString(_source);
+    protected override object? ParseIcon(uint foregroundColor = 0)=> XamlTools.FromSvgString(_source);
 
-    public object Get(uint foregroundColor = 0)
+    public object? Get(uint foregroundColor = 0)
     {
         throw new System.NotImplementedException();
     }
 
-    public Task<object> GetAsync(uint foregroundColor = 0)
+    public Task<object?> GetAsync(uint foregroundColor = 0)
     {
         throw new System.NotImplementedException();
     }

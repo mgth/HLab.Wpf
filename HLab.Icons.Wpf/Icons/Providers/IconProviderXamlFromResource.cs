@@ -5,44 +5,22 @@ using Color = System.Windows.Media.Color;
 
 namespace HLab.Icons.Wpf.Icons.Providers;
 
-public class IconProviderXamlFromResource : IconProviderXamlParser, IIconProvider
+public class IconProviderXamlFromResource(ResourceManager resourceManager, string name, Color? foreColor)
+    : IconProviderXamlParser
 {
-    readonly ResourceManager _resourceManager;
-    readonly string _name;
-    readonly Color? _foreColor;
- 
-    public IconProviderXamlFromResource(ResourceManager resourceManager, string name, Color? foreColor)
-    { 
-        _resourceManager = resourceManager; 
-        _name = name;
-        _foreColor = foreColor;
-    }
+    readonly Color? _foreColor = foreColor;
 
-    protected override object? ParseIcon()
+    protected override object? ParseIcon(uint foregroundColor = 0)
     {
-        using var xamlStream = _resourceManager.GetStream(_name);
+        using var xamlStream = resourceManager.GetStream(name);
         return xamlStream is null ? null : XamlTools.FromXamlStream(xamlStream);
     }
 
-    protected override async Task<object?> ParseIconAsync()
+    protected override async Task<object?> ParseIconAsync(uint foregroundColor = 0)
     {
-        await using var xamlStream = _resourceManager.GetStream(_name);
+        await using var xamlStream = resourceManager.GetStream(name);
         if (xamlStream == null) return null;
         return await XamlTools.FromXamlStreamAsync(xamlStream).ConfigureAwait(true);
     }
 
-    public object Get(uint foregroundColor = 0)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public Task<object> GetAsync(uint foregroundColor = 0)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public Task<string> GetTemplateAsync(uint foregroundColor = 0)
-    {
-        throw new System.NotImplementedException();
-    }
 }

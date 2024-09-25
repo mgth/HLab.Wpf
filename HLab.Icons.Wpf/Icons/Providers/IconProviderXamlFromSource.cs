@@ -14,12 +14,12 @@ public class IconProviderXamlFromSource(string source, string name, int? foregro
     readonly string _name = name;
     readonly int? _foreColor = foreground;
 
-    public object Get(uint foregroundColor = 0)
+    public object? Get(uint foregroundColor = 0)
     {
         throw new System.NotImplementedException();
     }
 
-    public Task<object> GetAsync(uint foregroundColor = 0)
+    public Task<object?> GetAsync(uint foregroundColor = 0)
 {
         throw new System.NotImplementedException();
     }

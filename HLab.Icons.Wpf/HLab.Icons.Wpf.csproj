@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HLab.Core\HLab.UI\HLab.UI.csproj" />
     <ProjectReference Include="..\HLab.ColorTools.Wpf\HLab.ColorTools.Wpf.csproj" />
     <ProjectReference Include="..\HLab.Base.Wpf\HLab.Base.Wpf.csproj" />
     <ProjectReference Include="..\..\HLab.Core\HLab.Core\HLab.Core.csproj" />

@@ -12,42 +12,31 @@ using Image = System.Windows.Controls.Image;
 
 namespace HLab.Icons.Wpf.Icons.Providers;
 
-public class IconProviderSvg : IconProviderXamlParser, IIconProvider
+public class IconProviderSvg(ResourceManager resourceManager, string name, Color? foreColor)
+    : IconProviderXamlParser
 {
-    readonly ResourceManager _resourceManager;
-    readonly string _name;
-    readonly Color? _foreColor;
-
-    public IconProviderSvg(ResourceManager resourceManager, string name, Color? foreColor)
+    protected override async Task<object?> ParseIconAsync(uint foregroundColor = 0)
     {
-        _resourceManager = resourceManager; 
-        _name = name;
-        _foreColor = foreColor;
-    }
-
-    protected override async Task<object?> ParseIconAsync()
-    {
-        if (string.IsNullOrWhiteSpace(_name)) return null;
+        if (string.IsNullOrWhiteSpace(name)) return null;
         AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
-        await using var svg = _resourceManager.GetStream(_name);
+        await using var svg = resourceManager.GetStream(name);
         if(svg is null) return null;
         return await XamlTools.FromSvgStreamAsync(svg).ConfigureAwait(true);
     }
 
-    protected override object? ParseIcon()
+    protected override object? ParseIcon(uint foregroundColor = 0)
     {
-        if (string.IsNullOrWhiteSpace(_name)) return null;
+        if (string.IsNullOrWhiteSpace(name)) return null;
         AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
-        using var svg = _resourceManager.GetStream(_name);
-        if (svg is null) return null;
-        return XamlTools.FromSvgStream(svg);
+        using var svg = resourceManager.GetStream(name);
+        return svg is null ? null : XamlTools.FromSvgStream(svg);
     }
 
 
     public async Task<object> GetBitmapAsync()
     {
         AppContext.SetSwitch("Switch.System.Xml.AllowDefaultResolver", true);
-        await using var svg = _resourceManager.GetStream(_name);
+        await using var svg = resourceManager.GetStream(name);
 //            var icon = await XamlTools.FromSvgStreamAsync(svg).ConfigureAwait(true);
         var icon = SvgDocument.Open<SvgDocument>(svg);
 
@@ -69,18 +58,4 @@ public class IconProviderSvg : IconProviderXamlParser, IIconProvider
         return image;
     }
 
-    public object Get(uint foregroundColor = 0)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<object> GetAsync(uint foregroundColor = 0)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<string> GetTemplateAsync(uint foregroundColor = 0)
-    {
-        throw new NotImplementedException();
-    }
 }
