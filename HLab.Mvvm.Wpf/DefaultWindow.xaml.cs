@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using HLab.Base.Wpf.DependencyProperties;
+using HLab.Mvvm.Annotations;
 
 namespace HLab.Mvvm.Wpf;
 
@@ -11,7 +12,7 @@ using H = DependencyHelper<DefaultWindow>;
 /// <summary>
 /// Logique d'interaction pour DefaultWindow.xaml
 /// </summary>
-public partial class DefaultWindow
+public partial class DefaultWindow : Window, IWindow
 {
     readonly Border _insideBorder;
     readonly ContentControl _content;
@@ -35,7 +36,7 @@ public partial class DefaultWindow
             }
         }
     }
-    public object View
+    public object? View
     {
         get => (object)GetValue(ViewProperty);
         set => SetValue(ViewProperty, value);
@@ -162,6 +163,8 @@ public partial class DefaultWindow
                 }
 
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
@@ -169,4 +172,5 @@ public partial class DefaultWindow
     {
         return base.ArrangeOverride(arrangeBounds);
     }
+
 }

@@ -42,8 +42,8 @@ namespace HLab.Mvvm.Application.Wpf
         }
         public Type MainViewMode { get; private set; }
 
-        public MainWpfViewModel ViewModel { get; set; } 
-        public Window MainWindow { get; protected set; }
+        public MainWpfViewModel? ViewModel { get; set; } 
+        public IWindow MainWindow { get; protected set; }
 
         static void InitializeCultures()
         {
@@ -87,8 +87,10 @@ namespace HLab.Mvvm.Application.Wpf
 
             ViewModel = _getMainViewModel();
 
-            MainWindow = (await _mvvm.MainContext.GetViewAsync(ViewModel,MainViewMode)).AsWindow();
-            MainWindow.Closing += (sender, args) => System.Windows.Application.Current.Shutdown();
+            MainWindow = _mvvm.ViewAsWindow(await _mvvm.MainContext.GetViewAsync(ViewModel,MainViewMode));
+
+// TODO
+            // MainWindow.Closing += (sender, args) => System.Windows.Application.Current.Shutdown();
 
             _menu.RegisterMenu("file", "{File}", null, null);
             _menu.RegisterMenu("data", "{Data}", null, null);

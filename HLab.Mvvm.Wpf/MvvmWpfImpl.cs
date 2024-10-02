@@ -22,8 +22,8 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
     {
         if (view is not DependencyObject obj) return;
 
-        ViewLocator.SetViewClass(obj,typeof(IDefaultViewClass));
-        ViewLocator.SetViewMode(obj,typeof(DefaultViewMode));
+        ViewLocator.SetViewClass(obj, typeof(IDefaultViewClass));
+        ViewLocator.SetViewMode(obj, typeof(DefaultViewMode));
     }
 
     static readonly object Template = XamlReader.Parse(@$"
@@ -45,8 +45,8 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
         return new NotFoundView
         {
             Title = { Content = "View not found" },
-            Message = { Content = (getType?.ToString() ?? "??") 
-                                  + "\n" + (viewMode?.FullName ?? "??") 
+            Message = { Content = (getType?.ToString() ?? "??")
+                                  + "\n" + (viewMode?.FullName ?? "??")
                                   + "\n" + (viewClass?.FullName ?? "??") }
         };
     }
@@ -62,4 +62,26 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
         throw new NotImplementedException();
     }
 
+    public IWindow ViewAsWindow(IView? view)
+    {
+        switch (view)
+        {
+            case IWindow win:
+                return win;
+            case FrameworkElement fe:
+            {
+                var w = new DefaultWindow
+                {
+                    DataContext = fe?.DataContext,
+                    View = view,
+                    //SizeToContent = SizeToContent.WidthAndHeight,
+                    //WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                };
+
+                return w;
+            }
+            default:
+                throw new ArgumentException("view should be FrameworkElement");
+        }
+    }
 }

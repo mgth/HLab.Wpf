@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using HLab.Base.ReactiveUI;
 using HLab.Core.Annotations;
 using HLab.Mvvm.Application.Documents;
 using HLab.Mvvm.Application.Messages;
@@ -40,7 +41,7 @@ namespace HLab.Mvvm.Application.Wpf
                 _documentHistory.Remove(value);
                 _documentHistory.Insert(0, value);
 
-                if (!SetAndRaise(ref _activeDocument,value)) return;
+                if (!this.SetAndRaise(ref _activeDocument,value)) return;
 
                 _message.Publish(_getSelectedMessage(value));
             }

@@ -1,6 +1,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using HLab.Base.ReactiveUI;
 using HLab.Erp.Acl;
 using HLab.Mvvm.Annotations;
 using HLab.Mvvm.Application.Documents;
@@ -48,7 +49,7 @@ public class MainWpfViewModel : ViewModel
         public bool IsActive
         {
         get => _isActive;
-        set => SetAndRaise(ref _isActive,value);
+        set => this.SetAndRaise(ref _isActive,value);
         }
     bool _isActive = true;
 

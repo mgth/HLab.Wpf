@@ -22,14 +22,14 @@ namespace HLab.Mvvm.Application.Wpf.Update
         public string Message
         {
             get => _message;
-            set => SetAndRaise(ref _message,value);
+            set => this.SetAndRaise(ref _message,value);
         }
         string _message ;
 
         public string FileName
         {
             get => _fileName;
-            set => SetAndRaise(ref _fileName,value);
+            set => this.SetAndRaise(ref _fileName,value);
         }
         string _fileName ;
 
@@ -39,7 +39,7 @@ namespace HLab.Mvvm.Application.Wpf.Update
         public string Url
         {
             get => _url;
-            set => SetAndRaise(ref _url,value);
+            set => this.SetAndRaise(ref _url,value);
         }
 
         string _url ;
@@ -47,7 +47,7 @@ namespace HLab.Mvvm.Application.Wpf.Update
         public Version NewVersion
         {
             get => _newVersion;
-            set => SetAndRaise(ref _newVersion,value);
+            set => this.SetAndRaise(ref _newVersion,value);
         }
 
         Version _newVersion ;
@@ -55,7 +55,7 @@ namespace HLab.Mvvm.Application.Wpf.Update
         public double Progress
         {
             get => _progress;
-            set => SetAndRaise(ref _progress,value);
+            set => this.SetAndRaise(ref _progress,value);
         }
 
         double _progress ;
@@ -63,7 +63,7 @@ namespace HLab.Mvvm.Application.Wpf.Update
         public bool Updated
         {
             get => _updated;
-            set => SetAndRaise(ref _updated,value);
+            set => this.SetAndRaise(ref _updated,value);
         }
 
         bool _updated = false;

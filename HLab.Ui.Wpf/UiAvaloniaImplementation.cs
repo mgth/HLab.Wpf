@@ -31,6 +31,13 @@ public class UiWpfImplementation : IUiPlatformImplementation
         await Application.Current.Dispatcher.InvokeAsync(callback);
     }
 
+    public async Task InvokeOnUiThreadAsync(Func<Task> callback)
+    {
+        await Application.Current.Dispatcher.InvokeAsync(callback);
+    }
+
+    public void VerifyAccess() => Application.Current.Dispatcher.VerifyAccess();
+
     public IGuiTimer CreateGuiTimer() => new GuiTimer();
     public string GetClipboardText()
     {
@@ -41,5 +48,10 @@ public class UiWpfImplementation : IUiPlatformImplementation
     public void SetClipboardText(string text)
     {
         Clipboard.SetText(text);
+    }
+
+    public void Quit()
+    {
+        Application.Current.Shutdown();
     }
 }
