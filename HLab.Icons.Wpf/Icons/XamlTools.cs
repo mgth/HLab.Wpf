@@ -229,7 +229,17 @@ public static class XamlTools
             };
             await Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                obj = xr.LoadAsync(xamlStream);
+               try
+               {
+                   obj = xr.LoadAsync(xamlStream);
+
+               }
+               catch(Exception ex)
+               {
+                  xamlStream.Position = 0;
+                  using var reader = new StreamReader(xamlStream);
+                  var xamlContent = reader.ReadToEnd();
+               }
             },XamlTools.Priority2);
 
             return await tcs.Task.ConfigureAwait(false);

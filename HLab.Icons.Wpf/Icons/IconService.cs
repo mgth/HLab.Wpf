@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
-using System.Windows.Threading;
 using HLab.Base;
 using HLab.Core;
 using HLab.Mvvm.Annotations;
-using Mages.Core;
-using HashCode = System.HashCode;
 using Size = System.Drawing.Size;
 
 namespace HLab.Icons.Wpf.Icons;

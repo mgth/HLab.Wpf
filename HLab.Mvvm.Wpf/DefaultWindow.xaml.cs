@@ -36,14 +36,14 @@ public partial class DefaultWindow : Window, IWindow
             }
         }
     }
-    public object? View
+    public IView? View
     {
-        get => (object)GetValue(ViewProperty);
+        get => (IView)GetValue(ViewProperty);
         set => SetValue(ViewProperty, value);
     }
 
     public static readonly DependencyProperty ViewProperty =
-        H.Property<object>()
+        H.Property<IView>()
             .OnChange((e, a) =>
             {
                 e._content.Content = a.NewValue;

@@ -24,8 +24,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
@@ -42,7 +40,7 @@ namespace HLab.Mvvm.Wpf
     /// Logique d'interaction pour EntityViewLocator.xaml
     /// </summary>
     ///
-    [ContentProperty(nameof(Model))]
+    //[ContentProperty(nameof(Model))]
     public class ViewLocator : ContentControl
     {
         bool _loaded = false;
@@ -116,15 +114,12 @@ namespace HLab.Mvvm.Wpf
                 }
                 e._hasModel = true;
 
-                e.Update();
+                if(e._loaded) e.Update();
             })
             .Register();
 
-        public static object GetModel(DependencyObject obj)
-            => obj.GetValue(ModelProperty);
-
-        public static void SetModel(DependencyObject obj, object value)
-            => obj.SetValue(ModelProperty, value);
+        public static readonly DependencyProperty ViewProperty = H.Property<IView?>()
+            .Register();
 
         public static Type GetViewMode(DependencyObject obj)
             => (Type)obj.GetValue(ViewModeProperty);
@@ -148,6 +143,12 @@ namespace HLab.Mvvm.Wpf
         {
             get => GetValue(ModelProperty);
             set => SetValue(ModelProperty, value);
+        }
+
+        public IView? View
+        {
+            get => (IView?)GetValue(ViewProperty);
+            set => SetValue(ViewProperty, value);
         }
 
         public Type ViewMode
@@ -191,7 +192,7 @@ namespace HLab.Mvvm.Wpf
 
         void ViewLocator_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if(!_hasModel) Dispatcher.InvokeAsync(Update);
+            if(_loaded && !_hasModel) Dispatcher.InvokeAsync(Update);
         }
 
         class Canceler
@@ -219,6 +220,8 @@ namespace HLab.Mvvm.Wpf
             if (context == null) return;
             if(model==null) return;
 
+            if(model.GetType().Name.Contains("Audio")) {}
+
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
             while (_cancel.TryPop(out var c))
@@ -234,16 +237,17 @@ namespace HLab.Mvvm.Wpf
             {
                 if(cancel.State) return;
 
-                var view = (FrameworkElement)await context.GetViewAsync(model, viewMode, viewClass);
+                var view = await context.GetViewAsync(model, viewMode, viewClass);
                 if(cancel.State) return;
 
-                if (view != null)
+                if (view is DependencyObject o)
                 {
-                    SetViewClass(view, typeof(IDefaultViewClass));
-                    SetViewMode(view, typeof(DefaultViewMode));
+                    SetViewClass(o, typeof(IDefaultViewClass));
+                    SetViewMode(o, typeof(DefaultViewMode));
                 }
                 Content = view;
-            }, DispatcherPriority.Input);
+                View = view;
+            }, DispatcherPriority.Render);
 
         }
     }
