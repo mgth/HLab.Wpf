@@ -18,18 +18,18 @@ public class IconProviderSvgFromSource : IconProviderXamlParser, IIconProvider
 
     protected override object? ParseIcon(uint foregroundColor = 0)=> XamlTools.FromSvgString(_source);
 
-    public object? Get(uint foregroundColor = 0)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public object? Get(uint foregroundColor = 0)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
-    public Task<object?> GetAsync(uint foregroundColor = 0)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public Task<object?> GetAsync(uint foregroundColor = 0)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 
-    public Task<string> GetTemplateAsync(uint foregroundColor = 0)
-    {
-        throw new System.NotImplementedException();
-    }
+    //public Task<string> GetTemplateAsync(uint foregroundColor = 0)
+    //{
+    //    throw new System.NotImplementedException();
+    //}
 }
