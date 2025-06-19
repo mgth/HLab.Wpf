@@ -74,8 +74,8 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
                 {
                     DataContext = fe?.DataContext,
                     View = view,
-                    //SizeToContent = SizeToContent.WidthAndHeight,
-                    //WindowStartupLocation = WindowStartupLocation.CenterOwner,
+                    // SizeToContent = dialog?SizeToContent.WidthAndHeight:SizeToContent.Manual,
+                    // WindowStartupLocation =  dialog?WindowStartupLocation.CenterOwner:WindowStartupLocation.Manual,
                 };
 
                 return w;

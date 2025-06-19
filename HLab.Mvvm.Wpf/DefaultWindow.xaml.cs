@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using HLab.Base.Wpf.DependencyProperties;
 using HLab.Mvvm.Annotations;
+using MahApps.Metro.Controls;
 
 namespace HLab.Mvvm.Wpf;
 
@@ -16,6 +17,32 @@ public partial class DefaultWindow : Window, IWindow
 {
     readonly Border _insideBorder;
     readonly ContentControl _content;
+
+    public void SetOwner(IView owner)
+    {
+       if(owner is FrameworkElement e)
+       {
+         Owner = GetWindow(e);
+       }
+    }
+
+    bool? IWindow.ShowDialog()
+   {
+      ShowInTaskbar = false;
+      Topmost = true;
+      
+      if(this == Application.Current.MainWindow)
+      { 
+         //SizeToContent = SizeToContent.WidthAndHeight;
+         WindowStartupLocation = WindowStartupLocation.CenterScreen;
+      }
+      else
+      {
+         SizeToContent = SizeToContent.WidthAndHeight;
+         WindowStartupLocation = WindowStartupLocation.CenterOwner;
+      }
+      return ShowDialog();
+   }
 
     public DefaultWindow()
     {
@@ -167,10 +194,4 @@ public partial class DefaultWindow : Window, IWindow
                 throw new ArgumentOutOfRangeException();
         }
     }
-
-    protected override Size ArrangeOverride(Size arrangeBounds)
-    {
-        return base.ArrangeOverride(arrangeBounds);
-    }
-
 }

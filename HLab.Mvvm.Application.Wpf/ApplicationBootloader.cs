@@ -89,7 +89,7 @@ namespace HLab.Mvvm.Application.Wpf
 
             MainWindow = _mvvm.ViewAsWindow(await _mvvm.MainContext.GetViewAsync(ViewModel,MainViewMode));
 
-// TODO
+// TODO URGENT
             // MainWindow.Closing += (sender, args) => System.Windows.Application.Current.Shutdown();
 
             _menu.RegisterMenu("file", "{File}", null, null);
