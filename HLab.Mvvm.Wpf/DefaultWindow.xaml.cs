@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using HLab.Base.Wpf.DependencyProperties;
 using HLab.Mvvm.Annotations;
-using MahApps.Metro.Controls;
 
 namespace HLab.Mvvm.Wpf;
 

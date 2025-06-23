@@ -13,11 +13,10 @@ using HLab.Mvvm.Annotations;
 using HLab.Mvvm.Application.Menus;
 using HLab.Mvvm.Application.Updater;
 using HLab.Mvvm.ReactiveUI;
-using HLab.Mvvm.Wpf.Views;
 
 namespace HLab.Mvvm.Application.Wpf
 {
-    public class ApplicationBootloader : IBootloader
+    public class ApplicationBootloader : Bootloader
     {
         readonly IMenuService _menu;
         readonly IMvvmService _mvvm;
@@ -56,10 +55,9 @@ namespace HLab.Mvvm.Application.Wpf
 
 
 
-        public async Task LoadAsync(IBootContext b)
+        public override async Task<BootState> LoadAsync()
         {
-            if (b.WaitDependency<LocalizeBootloader>()) return;
-            if (b.WaitDependency<LoginBootloader>()) return;
+            if (WaitingForBootloader<LocalizeFromDb.Bootloader>() || WaitingForBootloader<LoginBootloader>()) return BootState.Requeue;
 
             _info.Version = Assembly.GetEntryAssembly()?.GetName().Version;
 
@@ -80,7 +78,7 @@ namespace HLab.Mvvm.Application.Wpf
                     if (Updater.Updated)
                     {
                         System.Windows.Application.Current.Shutdown();
-                        return;;
+                        return BootState.Cancel;
                     }
                 }
             }
@@ -103,7 +101,7 @@ namespace HLab.Mvvm.Application.Wpf
 
             MainWindow.Show();
 
-            return;
+            return BootState.Completed;
         }
 
     }

@@ -4,12 +4,23 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 using HLab.Base;
+using HLab.Core.Annotations;
 using HLab.Mvvm.Annotations;
 
 namespace HLab.Mvvm.Wpf;
 
 public class MvvmWpfImpl : IMvvmPlatformImpl
 {
+   public class Boot(IMvvmService mvvm) : Bootloader
+   {
+      protected override BootState Load()
+      {
+         mvvm.RegisterPlatform<MvvmWpfImpl>();
+         return base.Load();
+      }
+   }
+
+   
     readonly ResourceDictionary _dictionary = new();
 
     public void Register(IMvvmService mvvm)

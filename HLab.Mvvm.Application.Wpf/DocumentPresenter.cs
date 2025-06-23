@@ -7,61 +7,48 @@ using HLab.Mvvm.Application.Documents;
 using HLab.Mvvm.Application.Messages;
 using HLab.Mvvm.ReactiveUI;
 
-
 namespace HLab.Mvvm.Application.Wpf
 {
-    
-    public class DocumentPresenter : ViewModel, IDocumentPresenter
-    {
-        readonly IMessagesService _message;
-        readonly Func<object, ISelectedMessage> _getSelectedMessage;
+   public class DocumentPresenter(IMessagesService message, Func<object, ISelectedMessage> getSelectedMessage)
+      : ViewModel, IDocumentPresenter
+   {
+      public ObservableCollection<object> Documents { get; } = [];
+      public ObservableCollection<object> Anchorables { get; } = [];
 
-        public DocumentPresenter
-        (
-            IMessagesService message,             
-            Func<object, ISelectedMessage> getSelectedMessage 
-        )
-        {
-            _message = message;
-            _getSelectedMessage = getSelectedMessage;
+      readonly List<object> _documentHistory = [];
 
-            
-        }
-
-        public ObservableCollection<object> Documents { get; } = new();
-        public ObservableCollection<object> Anchorables { get; } = new();
-
-        readonly List<object> _documentHistory = new();
-
-        public object ActiveDocument
-        {
-            get => _activeDocument;
-            set
+      public object? ActiveDocument
+      {
+         get;
+         set
+         {
+            if (value is not null)
             {
-                _documentHistory.Remove(value);
-                _documentHistory.Insert(0, value);
-
-                if (!this.SetAndRaise(ref _activeDocument,value)) return;
-
-                _message.Publish(_getSelectedMessage(value));
+               _documentHistory.Remove(value);
+               _documentHistory.Insert(0, value);
             }
-        }
-        object _activeDocument ;
+            if (!this.SetAndRaise(ref field, value)) return;
 
-        public bool RemoveDocument(object document)
-        {
-            if (!Documents.Contains(document)) return false;
-            if (_documentHistory.Count <= 0 || !ReferenceEquals(_documentHistory[0], document)) return false;
+            message.Publish(getSelectedMessage(value));
+         }
+      }
+      
+      public object? Theme {get; set => this.SetAndRaise(ref field,value); }
 
-            _documentHistory.Remove(document);
-            if (_documentHistory.Count > 0)
-            {
-                ActiveDocument = _documentHistory[0];
-            }
-            Documents.Remove(document);
+      public bool RemoveDocument(object document)
+      {
+         if (!Documents.Contains(document)) return false;
+         if (_documentHistory.Count <= 0 || !ReferenceEquals(_documentHistory[0], document)) return false;
 
-            return true;
-        }
+         _documentHistory.Remove(document);
+         if (_documentHistory.Count > 0)
+         {
+            ActiveDocument = _documentHistory[0];
+         }
+         Documents.Remove(document);
 
-    }
+         return true;
+      }
+
+   }
 }

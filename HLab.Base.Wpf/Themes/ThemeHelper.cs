@@ -15,7 +15,7 @@ using Microsoft.Win32;
 
 namespace HLab.Base.Wpf.Themes
 {
-    public class ThemeService
+    public class ThemeService(ResourceDictionary dictionary)
     {
         const string RegistryKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize";
         const string RegistryValueName = "AppsUseLightTheme";
@@ -28,13 +28,6 @@ namespace HLab.Base.Wpf.Themes
             Light,
             Dark,
             Auto
-        }
-
-
-        readonly ResourceDictionary _dictionary;
-        public ThemeService(ResourceDictionary dictionary)
-        {
-            _dictionary = dictionary;
         }
 
         ManagementEventWatcher? _watcher = null;
@@ -97,17 +90,17 @@ namespace HLab.Base.Wpf.Themes
                 case WindowsTheme.Light:
                     //ThemeManager.Current.ChangeTheme(this, "Light.Blue");
                     UnsetAuto();
-                    if (_dictionary.MergedDictionaries.Contains(_themeDark)) _dictionary.MergedDictionaries.Remove(_themeDark);
-                    if (!_dictionary.MergedDictionaries.Contains(_themeLight))
-                        _dictionary.MergedDictionaries.Add(_themeLight);
+                    if (dictionary.MergedDictionaries.Contains(_themeDark)) dictionary.MergedDictionaries.Remove(_themeDark);
+                    if (!dictionary.MergedDictionaries.Contains(_themeLight))
+                        dictionary.MergedDictionaries.Add(_themeLight);
                     break;
 
                 case WindowsTheme.Dark:
                     //ThemeManager.Current.ChangeTheme(this, "Dark.Blue");
                     UnsetAuto();
-                    if (_dictionary.MergedDictionaries.Contains(_themeLight)) _dictionary.MergedDictionaries.Remove(_themeLight);
-                    if (!_dictionary.MergedDictionaries.Contains(_themeDark))
-                        _dictionary.MergedDictionaries.Add(_themeDark);
+                    if (dictionary.MergedDictionaries.Contains(_themeLight)) dictionary.MergedDictionaries.Remove(_themeLight);
+                    if (!dictionary.MergedDictionaries.Contains(_themeDark))
+                        dictionary.MergedDictionaries.Add(_themeDark);
                     break;
                 case WindowsTheme.Auto:
                     SetAuto();

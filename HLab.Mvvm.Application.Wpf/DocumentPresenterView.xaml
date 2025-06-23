@@ -19,10 +19,11 @@
                 <DockingManager.Theme>
                     <!--<xcad:Vs2013LightTheme />-->
                     <!--<xcad:Vs2013DarkTheme />-->
-                    <!--<xcad:ExpressionLightTheme />-->
-                    <ExpressionDarkTheme />
+                    <!--<ExpressionLightTheme />-->
+                    <ExpressionDarkTheme/>
                     <!--<xcad:MetroTheme />-->
                     <!--<xcad:AeroTheme />-->
+                    <!--<Vs2013DarkTheme/>-->
                 </DockingManager.Theme>
 
                 <DockingManager.LayoutUpdateStrategy>
