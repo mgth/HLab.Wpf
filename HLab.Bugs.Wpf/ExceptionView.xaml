@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         SizeToContent ="WidthAndHeight"
         Title="Problem report" Height="450" Width="800"
-        Foreground="White"
-        Background="Black"
+        Foreground="{DynamicResource HLab.Brushes.Foreground}"
+        Background="{DynamicResource HLab.Brushes.Background}"
         MinWidth="500"
         >
     <StackPanel Margin="16">
@@ -38,22 +38,22 @@
                         <PathGeometry Figures="M436.891 452.4c16.628 0 30.851-8.27 39.063-22.669c8.211-14.414 8.065-31.087-0.322-45.485  L294.886 81.754c-8.388-13.871-22.933-22.157-38.887-22.157V452.4H436.891z" FillRule="NonZero"/>
                     </Path.Data>
                 </Path>
-                <Path Fill="#FFE1E4FB">
+                <Path Fill="{DynamicResource HLab.Brushes.Foreground}">
                     <Path.Data>
                         <PathGeometry Figures="M286.03 152.095v120.122c0 16.517-13.514 30.03-30.03 30.03s-30.031-13.514-30.031-30.03V152.095  c0-16.517 13.514-30.031 30.031-30.031S286.03 135.578 286.03 152.095z" FillRule="NonZero"/>
                     </Path.Data>
                 </Path>
-                <Path Fill="#FFC5C9F7">
+                <Path Fill="{DynamicResource HLab.Brushes.Foreground}">
                     <Path.Data>
                         <PathGeometry Figures="M286.03 152.095v120.122c0 16.517-13.514 30.03-30.03 30.03V122.064  C272.516 122.064 286.03 135.578 286.03 152.095z" FillRule="NonZero"/>
                     </Path.Data>
                 </Path>
-                <Path Fill="#FFE1E4FB">
+                <Path Fill="{DynamicResource HLab.Brushes.Foreground}">
                     <Path.Data>
                         <PathGeometry Figures="M256 332.278c-24.926 0-45.046 20.119-45.046 45.046c0 24.924 20.119 45.046 45.046 45.046  s45.046-20.121 45.046-45.046C301.046 352.398 280.925 332.278 256 332.278z" FillRule="NonZero"/>
                     </Path.Data>
                 </Path>
-                <Path Fill="#FFC5C9F7">
+                <Path Fill="{DynamicResource HLab.Brushes.Foreground}">
                     <Path.Data>
                         <PathGeometry Figures="M301.046 377.323c0 24.924-20.119 45.046-45.046 45.046v-90.091  C280.925 332.278 301.046 352.398 301.046 377.323z" FillRule="NonZero"/>
                     </Path.Data>
