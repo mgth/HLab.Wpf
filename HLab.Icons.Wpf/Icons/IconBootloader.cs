@@ -13,7 +13,12 @@ namespace HLab.Icons.Wpf.Icons;
 
 public class IconBootloader(IIconService icons) : Bootloader
 {
-   protected override BootState Load()
+   public async Task LoadAsync(IBootContext bootstrapper)
+   {
+      Load();
+   }
+
+   public void Load()
    {
       foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(e => !e.IsDynamic))
       {
@@ -69,8 +74,5 @@ public class IconBootloader(IIconService icons) : Bootloader
 
 
       }
-
-      return base.Load();
    }
-
 }
