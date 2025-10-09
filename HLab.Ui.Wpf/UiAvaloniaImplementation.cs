@@ -6,52 +6,24 @@ namespace HLab.Ui.Wpf;
 
 public class UiWpfImplementation : IUiPlatformImplementation
 {
-    public static void Initialize()
-    {
-        UiPlatform.Configure(new UiWpfImplementation());
-    }
+    public static void Initialize() => UiPlatform.Configure<UiWpfImplementation>();
 
-    public IOpenFileDialog CreateOpenFileDialog()
-    {
-        throw new NotImplementedException();
-    }
+    public IOpenFileDialog CreateOpenFileDialog() => throw new NotImplementedException();
 
-    public ISaveFileDialog CreateSaveFileDialog()
-    {
-        throw new NotImplementedException();
-    }
+    public ISaveFileDialog CreateSaveFileDialog() => throw new NotImplementedException();
 
-    public IEnumerable GetLogicalChildren(object fe)
-    {
-        throw new NotImplementedException();
-    }
+    public IEnumerable GetLogicalChildren(object fe) => throw new NotImplementedException();
 
-    public async Task InvokeOnUiThreadAsync(Action callback)
-    {
-        await Application.Current.Dispatcher.InvokeAsync(callback);
-    }
+    public Task InvokeOnUiThreadAsync(Action callback) => Application.Current.Dispatcher.InvokeAsync(callback).Task;
 
-    public async Task InvokeOnUiThreadAsync(Func<Task> callback)
-    {
-        await Application.Current.Dispatcher.InvokeAsync(callback);
-    }
+    public Task InvokeOnUiThreadAsync(Func<Task> callback) => Application.Current.Dispatcher.InvokeAsync(callback).Task;
 
     public void VerifyAccess() => Application.Current.Dispatcher.VerifyAccess();
 
     public IGuiTimer CreateGuiTimer() => new GuiTimer();
-    public string GetClipboardText()
-    {
-        return !Clipboard.ContainsText(TextDataFormat.Text) 
-            ? "" : Clipboard.GetText(TextDataFormat.Text);
-    }
+    public string GetClipboardText() => !Clipboard.ContainsText(TextDataFormat.Text) ? "" : Clipboard.GetText(TextDataFormat.Text);
 
-    public void SetClipboardText(string text)
-    {
-        Clipboard.SetText(text);
-    }
+    public void SetClipboardText(string text) => Clipboard.SetText(text);
 
-    public void Quit()
-    {
-        Application.Current.Shutdown();
-    }
+    public void Quit() => Application.Current.Shutdown();
 }

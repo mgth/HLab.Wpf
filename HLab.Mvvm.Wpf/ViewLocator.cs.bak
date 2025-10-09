@@ -220,6 +220,8 @@ namespace HLab.Mvvm.Wpf
             if (context == null) return;
             if(model==null) return;
 
+            if(model.GetType().Name.Contains("Audio")) {}
+
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
             while (_cancel.TryPop(out var c))

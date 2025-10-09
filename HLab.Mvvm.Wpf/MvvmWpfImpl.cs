@@ -13,7 +13,16 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
 {
    readonly ResourceDictionary _dictionary = new();
 
-   public void Register(IMvvmService mvvm)
+    public class Bootloader(IMvvmService mvvm) : Core.Annotations.Bootloader
+    {
+        protected override BootState Load()
+        {
+            mvvm.RegisterPlatform<IMvvmPlatformImpl>();
+            return base.Load();
+        }
+    }
+
+    public void Register(IMvvmService mvvm)
    {
       Application.Current.Resources.MergedDictionaries.Add(_dictionary);
       mvvm.ViewHelperFactory.Register<IView>(v => new ViewHelperWpf((FrameworkElement)v));
