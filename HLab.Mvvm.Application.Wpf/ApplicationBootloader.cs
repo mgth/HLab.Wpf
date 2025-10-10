@@ -44,14 +44,6 @@ namespace HLab.Mvvm.Application.Wpf
         public MainWpfViewModel? ViewModel { get; set; } 
         public IWindow MainWindow { get; protected set; }
 
-        static void InitializeCultures()
-        {
-            FrameworkElement.LanguageProperty.OverrideMetadata(
-                typeof(FrameworkElement),
-                new FrameworkPropertyMetadata(
-                    XmlLanguage.GetLanguage(
-                        CultureInfo.CurrentCulture.IetfLanguageTag)));
-        }
 
 
 
@@ -61,7 +53,7 @@ namespace HLab.Mvvm.Application.Wpf
 
             _info.Version = Assembly.GetEntryAssembly()?.GetName().Version;
 
-            InitializeCultures();
+            //  InitializeCultures();
 
             if (Updater != null )
             {

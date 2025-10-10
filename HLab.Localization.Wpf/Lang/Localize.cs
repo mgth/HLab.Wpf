@@ -36,6 +36,7 @@ public class Localize : TextBlock
         get => (string)GetValue(IdProperty);
         set => SetValue(IdProperty, value);
     }
+
     public static readonly DependencyProperty IdProperty =
         H.Property<string>()
             .OnChange(async (e, a) =>
@@ -100,10 +101,11 @@ public class Localize : TextBlock
         var localized = Id;
         try
         {
-            localized = await LocalizationService.LocalizeAsync(Language.IetfLanguageTag, localized).ConfigureAwait(false);
+            localized = await LocalizationService.LocalizeAsync(Language.IetfLanguageTag, localized);
         }
         catch (Exception)
         {
+            localized = Id;
         }
 
         await Dispatcher.InvokeAsync(() => Text = localized);

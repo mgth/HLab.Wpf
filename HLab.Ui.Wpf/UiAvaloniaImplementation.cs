@@ -1,12 +1,28 @@
 ﻿using System.Collections;
+using System.Globalization;
 using System.Windows;
+using System.Windows.Markup;
+using System.Windows.Threading;
 using HLab.UI;
 
 namespace HLab.Ui.Wpf;
 
 public class UiWpfImplementation : IUiPlatformImplementation
-{
-    public static void Initialize() => UiPlatform.Configure<UiWpfImplementation>();
+{        
+    public static void InitializeCultures()
+    {
+        FrameworkElement.LanguageProperty.OverrideMetadata(
+            typeof(FrameworkElement),
+            new FrameworkPropertyMetadata(
+                XmlLanguage.GetLanguage(
+                    CultureInfo.CurrentCulture.IetfLanguageTag)));
+    }
+
+    public static void Initialize()
+    {
+        InitializeCultures();
+        UiPlatform.Configure<UiWpfImplementation>();
+    }
 
     public IOpenFileDialog CreateOpenFileDialog() => throw new NotImplementedException();
 
