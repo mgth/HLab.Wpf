@@ -7,12 +7,12 @@ using HLab.Mvvm.Annotations;
 
 namespace HLab.Mvvm.Wpf;
 
-using H = DependencyHelper<DefaultWindow>;
+using H = DependencyHelper<ChromeWindow>;
 
 /// <summary>
 /// Logique d'interaction pour DefaultWindow.xaml
 /// </summary>
-public partial class DefaultWindow : Window, IWindow
+public partial class ChromeWindow : Window, IWindow
 {
     readonly Border _insideBorder;
     readonly ContentControl _content;
@@ -43,7 +43,7 @@ public partial class DefaultWindow : Window, IWindow
         return ShowDialog();
     }
 
-    public DefaultWindow()
+    public ChromeWindow()
     {
         InitializeComponent();
 

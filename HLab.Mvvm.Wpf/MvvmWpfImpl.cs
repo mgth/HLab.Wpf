@@ -94,5 +94,5 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
             throw new ArgumentException("view should be FrameworkElement");
       }
    }
-   public IWindow ViewAsWindow(IView? view) => ViewAsWindow<DefaultWindow>(view);
+   public IWindow ViewAsWindow(IView? view) => ViewAsWindow<ChromeWindow>(view);
 }
