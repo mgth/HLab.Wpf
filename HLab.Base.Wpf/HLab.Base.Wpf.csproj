@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Mages" Version="3.0.0" />
+    <PackageReference Include="Mages" Version="3.0.1" />
     <PackageReference Include="System.Management" Version="9.0.6" />
   </ItemGroup>
 
