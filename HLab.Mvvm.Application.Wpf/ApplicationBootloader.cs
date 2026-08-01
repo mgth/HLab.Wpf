@@ -77,7 +77,7 @@ namespace HLab.Mvvm.Application.Wpf
 
             ViewModel = _getMainViewModel();
 
-            MainWindow = _mvvm.ViewAsWindow(await _mvvm.MainContext.GetViewAsync(ViewModel,MainViewMode));
+            MainWindow = _mvvm.ViewAsWindow(_mvvm.MainContext.GetView(ViewModel,MainViewMode,typeof(IDefaultViewClass)));
 
 // TODO URGENT
             // MainWindow.Closing += (sender, args) => System.Windows.Application.Current.Shutdown();

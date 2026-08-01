@@ -41,8 +41,7 @@ namespace HLab.Mvvm.Wpf.Converters
             var viewMode = (Type) fe?.GetValue(ViewLocator.ViewModeProperty);
             var viewClass = (Type)fe?.GetValue(ViewLocator.ViewClassProperty);
 
-            //TODO : remove the .Result
-            return p?.GetLinkedAsync(value, viewMode, viewClass).Result;
+            return p?.GetLinked(value, viewMode, viewClass);
         }
 
         public object ConvertBack(object value, Type targetType,

@@ -231,11 +231,11 @@ namespace HLab.Mvvm.Wpf
             var cancel = new Canceler();
             _cancel.Push(cancel);
 
-            var t = Dispatcher.BeginInvoke(async () =>
+            var t = Dispatcher.BeginInvoke(() =>
             {
                 if(cancel.State) return;
 
-                var view = await context.GetViewAsync(model, viewMode, viewClass);
+                var view = context.GetView(model, viewMode, viewClass);
                 if(cancel.State) return;
 
                 if (view is DependencyObject o)

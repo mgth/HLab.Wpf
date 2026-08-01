@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net9.0-windows</TargetFrameworks>
+    <TargetFrameworks>net10.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <RootNamespace>HLab.Base.Wpf</RootNamespace>
     <Platforms>x64;AnyCPU</Platforms>
@@ -49,7 +49,7 @@
 
   <ItemGroup>
     <PackageReference Include="Mages" Version="3.0.1" />
-    <PackageReference Include="System.Management" Version="9.0.11" />
+    <PackageReference Include="System.Management" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>

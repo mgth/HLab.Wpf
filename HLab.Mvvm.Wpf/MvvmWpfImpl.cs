@@ -28,12 +28,24 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
       mvvm.ViewHelperFactory.Register<IView>(v => new ViewHelperWpf((FrameworkElement)v));
    }
 
-   public async Task PrepareViewAsync(IView view, CancellationToken token = default)
+   public void PrepareView(IView view)
    {
       if (view is not DependencyObject obj) return;
 
-      ViewLocator.SetViewClass(obj, typeof(IDefaultViewClass));
-      ViewLocator.SetViewMode(obj, typeof(DefaultViewMode));
+      if (obj.Dispatcher.CheckAccess())
+      {
+         Prepare();
+         return;
+      }
+
+      obj.Dispatcher.Invoke(Prepare);
+      return;
+
+      void Prepare()
+      {
+         ViewLocator.SetViewClass(obj, typeof(IDefaultViewClass));
+         ViewLocator.SetViewMode(obj, typeof(DefaultViewMode));
+      }
    }
 
    static readonly object Template = XamlReader.Parse(@$"
@@ -50,7 +62,7 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
       _dictionary.Add(new DataTemplateKey(type), Template);
    }
 
-   public async Task<IView> GetNotFoundViewAsync(Type getType, Type viewMode, Type viewClass, CancellationToken token = default)
+   public IView GetNotFoundView(Type getType, Type viewMode, Type viewClass)
    {
       return new NotFoundView
       {
