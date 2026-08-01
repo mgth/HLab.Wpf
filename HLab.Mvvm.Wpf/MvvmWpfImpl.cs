@@ -59,7 +59,10 @@ public class MvvmWpfImpl : IMvvmPlatformImpl
    {
       if (type.IsInterface) return;
 
-      _dictionary.Add(new DataTemplateKey(type), Template);
+      var key = new DataTemplateKey(type);
+      if (_dictionary.Contains(key)) return;
+
+      _dictionary.Add(key, Template);
    }
 
    public IView GetNotFoundView(Type getType, Type viewMode, Type viewClass)
