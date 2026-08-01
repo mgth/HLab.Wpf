@@ -32,7 +32,10 @@ public class UiWpfImplementation : IUiPlatformImplementation
 
     public Task InvokeOnUiThreadAsync(Action callback) => Application.Current.Dispatcher.InvokeAsync(callback).Task;
 
-    public Task InvokeOnUiThreadAsync(Func<Task> callback) => Application.Current.Dispatcher.InvokeAsync(callback).Task;
+    // Unwrap : InvokeAsync(Func<Task>) rend un Task<Task> — sans Unwrap l'appelant
+    // reprend dès le DEMARRAGE du callback, pas à sa fin (le LoginBootloader
+    // voyait Connection==null et quittait avant l'affichage du login).
+    public Task InvokeOnUiThreadAsync(Func<Task> callback) => Application.Current.Dispatcher.InvokeAsync(callback).Task.Unwrap();
 
     public void VerifyAccess() => Application.Current.Dispatcher.VerifyAccess();
 
