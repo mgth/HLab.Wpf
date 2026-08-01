@@ -39,7 +39,10 @@ namespace HLab.Mvvm.Application.Wpf
         {
             MainViewMode = vm;
         }
-        public Type MainViewMode { get; private set; }
+
+        // DefaultViewMode par défaut : personne n'appelle SetMainViewMode, et la
+        // résolution de vues modernisée ne tolère plus un viewMode null.
+        public Type MainViewMode { get; private set; } = typeof(DefaultViewMode);
 
         public MainWpfViewModel? ViewModel { get; set; } 
         public IWindow MainWindow { get; protected set; }
