@@ -207,6 +207,11 @@ namespace HLab.Mvvm.Wpf
 
         readonly ConcurrentStack<Canceler> _cancel = new();
 
+        object _resolvedModel;
+        Type _resolvedViewMode;
+        Type _resolvedViewClass;
+        IMvvmContext _resolvedContext;
+
         protected void Update()
         {
             if(!_loaded) return;
@@ -219,6 +224,16 @@ namespace HLab.Mvvm.Wpf
             if (viewClass == null) return;
             if (context == null) return;
             if(model==null) return;
+
+            // Loaded rejoue Update à chaque réinsertion dans l'arbre (changement
+            // d'onglet AvalonDock...) : ne pas re-résoudre une vue déjà en place —
+            // les vues ne sont pas cachées, on recréerait un doublon dont les
+            // enfants logiques appartiennent encore à l'ancienne instance.
+            if (Content != null
+                && ReferenceEquals(model, _resolvedModel)
+                && viewMode == _resolvedViewMode
+                && viewClass == _resolvedViewClass
+                && ReferenceEquals(context, _resolvedContext)) return;
 
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
@@ -245,6 +260,11 @@ namespace HLab.Mvvm.Wpf
                 }
                 Content = view;
                 View = view;
+
+                _resolvedModel = model;
+                _resolvedViewMode = viewMode;
+                _resolvedViewClass = viewClass;
+                _resolvedContext = context;
             }, DispatcherPriority.Render);
 
         }
