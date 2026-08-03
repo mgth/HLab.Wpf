@@ -63,6 +63,12 @@ public partial class DefaultWindow : Window, IWindow
             }
         }
     }
+    protected override void OnSourceInitialized(EventArgs e)
+    {
+        base.OnSourceInitialized(e);
+        CaptionDoubleClick.Disable(this);
+    }
+
     public IView? View
     {
         get => (IView)GetValue(ViewProperty);
